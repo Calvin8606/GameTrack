@@ -1,0 +1,10 @@
+# macOS
+.DS_Store
+
+# Editor folders
+.idea/
+.vscode/
+*.swp
+
+# Global logs
+*.log

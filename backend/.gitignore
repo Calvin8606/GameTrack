@@ -1,0 +1,18 @@
+# Node.js
+node_modules/
+npm-debug.log*
+
+# Environment variables
+.env
+
+# Prisma
+prisma/dev.db
+prisma/dev.db-journal
+.prisma/
+
+# Build output
+dist/
+build/
+
+# Logs
+*.log
