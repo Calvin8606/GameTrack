@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import express, { Request, Response } from "express";
+import { Request, Response } from "express";
 import dotenv from "dotenv";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -10,7 +10,7 @@ const userLogin = async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
   try {
-    // Check if valid Email
+    // Check if valid User
     const user = await prisma.user.findUnique({
       where: { email: email.toLowerCase() },
     });
@@ -27,16 +27,13 @@ const userLogin = async (req: Request, res: Response) => {
       return;
     }
 
-    const currentTimestamp = Math.floor(Date.now() / 1000);
-    const expiresIn = 43200;
     const token = jwt.sign(
       {
         id: user.id,
         email: user.email,
-        iat: currentTimestamp, // Issued at time
-        exp: currentTimestamp + expiresIn, // Expiration time
       },
       process.env.JWT_SECRET!,
+      { expiresIn: "23h" },
     );
     res.status(200).json({
       message: "Login successful",
