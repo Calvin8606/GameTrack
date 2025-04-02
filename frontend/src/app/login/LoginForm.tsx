@@ -2,6 +2,7 @@
 import AuthFormWrap from "../../components/AuthFormWrap";
 import { useState } from "react";
 import { BASE_URL, TOKEN_KEY } from "@/lib/constants";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
@@ -28,6 +29,10 @@ const LoginForm = () => {
         throw new Error(data.error || "Login failed");
       }
 
+      // Reset Inputs
+      setEmail("");
+      setPassword("");
+
       // Redirect To HomePage
       router.push("/homepage");
 
@@ -40,28 +45,47 @@ const LoginForm = () => {
 
   return (
     <div>
-      <AuthFormWrap title="Login">
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Email"
-            required
-            className="p-2 border rounded"
-          />
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password"
-            required
-            className="p-2 border rounded"
-          />
-          <button type="submit" className="bg-black text-white p-2 rounded">
-            Login
-          </button>
-        </form>
+      <AuthFormWrap>
+        <div>
+          <form onSubmit={handleSubmit}>
+            <div className="flex flex-col">
+              <h1 className="font-bold text-lg mb-1">Email</h1>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Email"
+                required
+                className="p-2 border rounded-xl"
+              />
+            </div>
+            <div className="flex flex-col mt-5">
+              <h1 className="font-bold text-lg mb-1">Password</h1>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Password"
+                required
+                className="p-2 border rounded-xl"
+              />
+            </div>
+            <div className="flex items-center justify-center mt-8">
+              <button
+                type="submit"
+                className="bg-black text-white font-bold text-3xl px-30 py-3 rounded-full"
+              >
+                Login
+              </button>
+            </div>
+          </form>
+          <div className="mt-5">
+            <Link href="/register" className="font-bold">
+              New Account?
+            </Link>
+          </div>
+          <div> </div>
+        </div>
       </AuthFormWrap>
     </div>
   );

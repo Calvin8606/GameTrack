@@ -45,7 +45,7 @@ const RegisterForm = () => {
 
   return (
     <div>
-      <AuthFormWrap title="Registration">
+      <AuthFormWrap>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <input
             type="email"
@@ -71,7 +71,7 @@ const RegisterForm = () => {
             required
             className="p-2 border rounded"
           />
-          <button type="submit" className="bg-black text-white p-2 rounded">
+          <button type="submit" className="bg-black text-white p-2 rounded-xl">
             Register
           </button>
         </form>
