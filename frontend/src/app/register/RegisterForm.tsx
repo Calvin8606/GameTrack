@@ -2,11 +2,13 @@
 import AuthFormWrap from "../../components/AuthFormWrap";
 import { useState } from "react";
 import { BASE_URL } from "@/lib/constants";
+import { useRouter } from "next/navigation";
 
 const RegisterForm = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,6 +26,8 @@ const RegisterForm = () => {
         }),
       });
       const data = await res.json();
+      console.log("Login Response:", data);
+
       if (!res.ok) {
         throw new Error(data.error || "Something went wrong");
       }
@@ -32,6 +36,8 @@ const RegisterForm = () => {
       setEmail("");
       setName("");
       setPassword("");
+
+      router.push("/login");
     } catch (err) {
       console.log("Error", err);
     }

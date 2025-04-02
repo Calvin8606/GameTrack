@@ -2,10 +2,12 @@
 import AuthFormWrap from "../../components/AuthFormWrap";
 import { useState } from "react";
 import { BASE_URL, TOKEN_KEY } from "@/lib/constants";
+import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,10 +22,14 @@ const LoginForm = () => {
         }),
       });
       const data = await res.json();
+      console.log("Login Response:", data);
 
       if (!res.ok) {
         throw new Error(data.error || "Login failed");
       }
+
+      // Redirect To HomePage
+      router.push("/homepage");
 
       // Set token to localStorage
       localStorage.setItem(TOKEN_KEY, data.token);
