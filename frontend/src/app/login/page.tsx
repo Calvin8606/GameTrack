@@ -2,7 +2,7 @@ import LoginForm from "./LoginForm";
 
 const Login = () => {
   return (
-    <div>
+    <div className="bg-[url('/assets/AuthBackground.png')] bg-cover bg-center h-screen w-full">
       <LoginForm />
     </div>
   );
