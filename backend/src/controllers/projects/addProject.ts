@@ -27,6 +27,9 @@ const addProject = async (req: Request, res: Response) => {
           },
         },
       },
+      include: {
+        members: true,
+      },
     });
     res.status(201).json({ message: "Project created", project });
   } catch (err) {
