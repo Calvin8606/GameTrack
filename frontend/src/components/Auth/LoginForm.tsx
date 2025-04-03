@@ -1,12 +1,12 @@
 "use client";
-import AuthFormWrap from "../../components/AuthFormWrap";
+import AuthFormWrap from "./AuthFormWrap";
 import { useState } from "react";
-import { BASE_URL } from "@/lib/constants";
+import { BASE_URL, TOKEN_KEY } from "@/lib/constants";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-const RegisterForm = () => {
+const LoginForm = () => {
   const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
@@ -14,38 +14,39 @@ const RegisterForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSuccess("");
+    setError("");
 
     try {
-      const res = await fetch(`${BASE_URL}/users/register`, {
+      const res = await fetch(`${BASE_URL}/users/login`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           email,
-          name,
           password,
         }),
       });
       const data = await res.json();
-      console.log("Registration Response:", data);
+      console.log("Login Response:", data);
 
       if (!res.ok) {
-        throw new Error(data.error || "Something went wrong");
+        throw new Error(data.error || "Login failed");
       }
 
       // Reset Inputs
       setEmail("");
-      setName("");
       setPassword("");
-      setSuccess("Register successful! Redirecting...");
 
-      router.push("/login");
+      // Redirect To HomePage
+      router.push("/dashboard");
+
+      // Set token to localStorage
+      localStorage.setItem(TOKEN_KEY, data.token);
+      setSuccess("Login successful! Redirecting...");
     } catch (err) {
-      console.log("Error", err);
       setEmail("");
-      setName("");
       setPassword("");
+      console.log("Error", err);
       setError((err as Error).message || "An unexpected error occurred.");
     }
   };
@@ -54,7 +55,7 @@ const RegisterForm = () => {
     <div>
       <AuthFormWrap>
         <div>
-          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <form onSubmit={handleSubmit}>
             {(error || success) && (
               <div className="absolute top-0 left-0 right-0 z-10">
                 {error && (
@@ -80,40 +81,39 @@ const RegisterForm = () => {
                 className="p-3 border rounded-xl text-lg"
               />
             </div>
-            <div className="flex flex-col">
-              <h1 className="font-bold text-lg mb-1">Name</h1>
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Full Name"
-                required
-                className="p-3 border rounded-xl text-lg"
-              />
-            </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col mt-5">
               <h1 className="font-bold text-lg mb-1">Password</h1>
               <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Password"
+                required
                 className="p-3 border rounded-xl text-lg"
               />
             </div>
-            <div className="flex flex-col mt-5">
+            <div className="flex items-center justify-center mt-15">
               <button
                 type="submit"
                 className="bg-black text-white font-bold text-3xl px-30 py-3 rounded-full cursor-pointer transition"
               >
-                Register
+                Login
               </button>
             </div>
           </form>
+          <div className="mt-15">
+            <Link
+              href="/register"
+              className="font-bold text-lg hover:text-blue-600"
+            >
+              New Account?
+            </Link>
+          </div>
+          <div> </div>
         </div>
       </AuthFormWrap>
     </div>
   );
 };
 
-export default RegisterForm;
+export default LoginForm;
