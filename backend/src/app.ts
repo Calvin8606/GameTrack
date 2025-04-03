@@ -11,6 +11,6 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.use("/api/users", userRoutes);
-app.use("api/projects", projectRoutes);
+app.use("/api/projects", projectRoutes);
 
 export default app;
