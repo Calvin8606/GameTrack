@@ -16,6 +16,7 @@ const addUser = async (req: Request, res: Response) => {
   // Check if user exists
   if (existingUser) {
     res.status(400).json("Email already in use!");
+    return;
   }
 
   const user = await prisma.user.create({
