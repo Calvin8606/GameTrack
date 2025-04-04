@@ -1,13 +1,20 @@
-# Dockerfile
+# Use lightweight Node image
 FROM node:22.14.0-alpine
 
+# Set working directory
 WORKDIR /app
 
-COPY . .
+# Copy only package files first for better caching
+COPY package*.json ./
 
+# Install dependencies
 RUN npm install
 
-# Remove the Prisma commands from the build phase:
-# RUN npx prisma generate && npx prisma migrate deploy
+# Copy the rest of the app
+COPY . .
 
-CMD ["npm","dist/server.js"]
+# Compile TypeScript and generate Prisma Client
+RUN npm run build && npx prisma generate
+
+# Run migrations and start server at runtime
+CMD ["sh", "-c", "npx prisma migrate deploy && node dist/server.js"]

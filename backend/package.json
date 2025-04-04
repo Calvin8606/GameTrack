@@ -6,8 +6,7 @@
     "dev": "nodemon src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js",
-    "prisma": "prisma",
-    "postinstall": "npm run build && prisma generate && prisma migrate deploy"
+    "prisma": "prisma"
   },
   "keywords": [],
   "author": "",
