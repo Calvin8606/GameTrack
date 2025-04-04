@@ -10,7 +10,6 @@ const app = express();
 app.use(
   cors({
     origin: ["http://localhost:3000", "https://gametrack.dev"],
-    credentials: true,
   }),
 );
 app.use(bodyParser.json());
