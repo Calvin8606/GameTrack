@@ -5,7 +5,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN npm install --production
+RUN npm install
 
 # Remove the Prisma commands from the build phase:
 # RUN npx prisma generate && npx prisma migrate deploy
