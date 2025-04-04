@@ -14,7 +14,8 @@ RUN npm install
 COPY . .
 
 # Compile TypeScript and generate Prisma Client
-RUN npm run build && npx prisma generate && npx prisma migrate deploy
+RUN npm run build && npx prisma generate
 
 # Run migrations and start server at runtime
-CMD ["sh", "-c", "npx prisma migrate deploy && node dist/server.js"]
+CMD ["sh", "-c",  "echo 🚀 Starting container && npx prisma migrate deploy && node dist/server.js"]
+#CMD ["sh", "-c", "npx prisma migrate deploy && node dist/server.js"]
