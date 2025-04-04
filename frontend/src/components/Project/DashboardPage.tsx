@@ -80,13 +80,13 @@ const DashboardPage = () => {
               <div className="flex justify-end gap-2">
                 <button
                   onClick={() => setShowModal(false)}
-                  className="bg-gray-200 px-4 py-2 rounded"
+                  className="bg-gray-200 px-4 py-2 rounded transition cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={handleAddProject}
-                  className="bg-black text-white px-4 py-2 rounded"
+                  className="bg-black text-white px-4 py-2 rounded transition cursor-pointer"
                 >
                   Create
                 </button>
@@ -95,7 +95,7 @@ const DashboardPage = () => {
           </AddProjectModal>
         )}
 
-        <div className="grid grid-cols-4 items-start justify-start gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-start justify-start gap-10">
           <ProjectCard isAddCard onClick={() => setShowModal(true)} />
           {projects.map((project) => (
             <ProjectCard
