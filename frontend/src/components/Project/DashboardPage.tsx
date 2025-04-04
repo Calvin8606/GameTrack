@@ -66,7 +66,7 @@ const DashboardPage = () => {
 
   return (
     <div>
-      <div className="pt-30 m-10 flex items-center justify-center">
+      <div className="pt-40- m-10 flex items-center justify-center">
         {showModal && (
           <AddProjectModal onClose={() => setShowModal(false)}>
             <div>

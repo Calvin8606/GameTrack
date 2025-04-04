@@ -16,9 +16,11 @@ const ProjectPage = () => {
       try {
         const res = await fetch(`${BASE_URL}/projects/${params.id}`, {
           headers: {
+            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
         });
+
         if (!res.ok) {
           return router.push("/404");
         }
