@@ -16,3 +16,8 @@ build/
 
 # Logs
 *.log
+
+# Ignore Docker setup
+Dockerfile
+docker-compose.yml
+.dockerignore
