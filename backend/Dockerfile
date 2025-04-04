@@ -17,4 +17,4 @@ COPY . .
 RUN npm run build && npx prisma generate
 
 # Run migrations and start server at runtime
-CMD ["npm", "run", "start"]
+CMD ["node dist/server.js"]
