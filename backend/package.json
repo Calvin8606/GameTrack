@@ -5,8 +5,9 @@
   "scripts": {
     "dev": "nodemon --watch src --ext ts --exec ts-node src/server.ts",
     "build": "tsc",
-    "start": "node dist/server.js",
-    "prisma": "prisma"
+    "start": "ts-node src/server.ts",
+    "prisma": "prisma",
+    "postinstall": "prisma generate"
   },
   "keywords": [],
   "author": "",
