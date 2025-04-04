@@ -5,7 +5,7 @@ import { BASE_URL, TOKEN_KEY } from "@/lib/constants";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-const LoginForm = () => {
+const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [success, setSuccess] = useState("");
@@ -116,4 +116,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default LoginPage;

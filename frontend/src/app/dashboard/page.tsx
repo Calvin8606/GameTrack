@@ -1,9 +1,9 @@
-import DashboardComponent from "./DashboardComponent";
+import DashboardPage from "../../components/Project/DashboardPage";
 
 const Dashboard = () => {
   return (
     <div>
-      <DashboardComponent />
+      <DashboardPage />
     </div>
   );
 };

@@ -1,48 +1,45 @@
 "use client";
 
-import { FC } from "react";
-import Image from "next/image";
-
-enum Role {
-  OWNER = "OWNER",
-  EDITOR = "EDITOR",
-  VIEWER = "VIEWER",
-}
+import { Role } from "@/types/project";
 
 interface ProjectCardProps {
-  name: string;
-  createdAt: string;
-  role: Role;
+  name?: string;
+  createdAt?: string;
+  role?: Role;
   onClick: () => void;
+  isAddCard?: boolean;
 }
 
-const ProjectCard: FC<ProjectCardProps> = ({
+const ProjectCard = ({
   name,
   createdAt,
   role,
   onClick,
-}) => {
+  isAddCard = false,
+}: ProjectCardProps) => {
   return (
     <div
       onClick={onClick}
-      className="w-full max-w-[220px] p-2 bg-white shadow-sm rounded-md cursor-pointer hover:shadow-md transition text-sm"
+      className={`h-36 w-60 p-2 bg-white rounded-lg shadow-sm hover:shadow-md transition cursor-pointer flex flex-col justify-center items-center border ${
+        isAddCard ? "border-1 border-dashed border-gray-400 text-gray-500" : ""
+      }`}
     >
-      <Image
-        src="/assets/AuthBackground.png"
-        alt="Project preview"
-        width={280}
-        height={120}
-        className="w-full h-24 object-cover rounded-sm mb-2"
-      />
-      <h3 className="font-semibold text-base mb-1 truncate flex items-center justify-center">
-        {name}
-      </h3>
-      <p className="text-gray-500 flex items-center justify-center">
-        Created: {createdAt}
-      </p>
-      <p className="font-medium flex items-center justify-center">
-        Role:{` ${role}`}
-      </p>
+      {isAddCard ? (
+        <div>
+          <span className="flex items-center justify-center text-4xl">➕</span>
+          <p className="flex items-center justify-center font-semibold mt-2">
+            New Project
+          </p>
+        </div>
+      ) : (
+        <div className="">
+          <h3 className="font-medium text-center truncate w-full mb-1">
+            {name}
+          </h3>
+          <p className="text-xs text-gray-500">Created: {createdAt}</p>
+          <p className="text-xs font-medium">Role: {role}</p>
+        </div>
+      )}
     </div>
   );
 };

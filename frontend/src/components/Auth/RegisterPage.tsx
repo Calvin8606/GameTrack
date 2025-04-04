@@ -4,7 +4,7 @@ import { useState } from "react";
 import { BASE_URL } from "@/lib/constants";
 import { useRouter } from "next/navigation";
 
-const RegisterForm = () => {
+const RegisterPage = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -116,4 +116,4 @@ const RegisterForm = () => {
   );
 };
 
-export default RegisterForm;
+export default RegisterPage;
