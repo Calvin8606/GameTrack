@@ -9,7 +9,11 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["https://gametrack.dev", "http://localhost:3000"],
+    origin: [
+      "https://gametrack.dev",
+      "https://www.gametrack.dev",
+      "http://localhost:3000",
+    ],
     credentials: true,
   }),
 );
