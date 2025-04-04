@@ -10,4 +10,4 @@ RUN npm install --production
 # Remove the Prisma commands from the build phase:
 # RUN npx prisma generate && npx prisma migrate deploy
 
-CMD ["npm","run", "start"]
+CMD ["npm","dist/server.js"]

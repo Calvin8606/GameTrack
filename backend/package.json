@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "npx prisma generate && npx prisma migrate deploy && node dist/server.js",
+    "dev": "nodemon src/server.ts",
     "build": "tsc",
-    "start": "node src/server.ts",
-    "prisma": "prisma"
+    "start": "node dist/server.js",
+    "prisma": "prisma",
+    "postinstall": "npm run build && prisma generate && prisma migrate deploy"
   },
   "keywords": [],
   "author": "",
