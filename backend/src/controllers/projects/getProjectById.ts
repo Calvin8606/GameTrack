@@ -4,7 +4,8 @@ const prisma = new PrismaClient();
 
 const getProjectById = async (req: Request, res: Response) => {
   const projectId = parseInt(req.params.id);
-  const userId = (req as any).user;
+  const user = (req as any).user;
+  const userId = user.id;
 
   try {
     const findProject = await prisma.project.findFirst({
@@ -23,9 +24,10 @@ const getProjectById = async (req: Request, res: Response) => {
       return;
     }
 
-    res.json({ findProject });
+    res.json({ project: findProject });
   } catch (err) {
     console.log("Error", err);
+    res.status(500).json({ error: "Server error" });
   }
 };
 
