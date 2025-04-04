@@ -7,7 +7,7 @@
     "build": "tsc",
     "start": "ts-node src/server.ts",
     "prisma": "prisma",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate && prisma migrate deploy"
   },
   "keywords": [],
   "author": "",
