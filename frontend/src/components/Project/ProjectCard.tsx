@@ -20,7 +20,7 @@ const ProjectCard = ({
   return (
     <div
       onClick={onClick}
-      className={`h-36 w-60 p-2 bg-white rounded-lg shadow-sm hover:shadow-md transition cursor-pointer flex flex-col justify-center items-center border ${
+      className={`h-36 w-60 p-2 bg-white shadow-sm hover:shadow-md transition cursor-pointer flex flex-col justify-center items-center border ${
         isAddCard ? "border-1 border-dashed border-gray-400 text-gray-500" : ""
       }`}
     >
