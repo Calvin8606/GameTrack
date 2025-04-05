@@ -8,19 +8,19 @@ RUN corepack enable && corepack prepare pnpm@latest --activate
 WORKDIR /app
 
 # Copy only package files first for better caching
-COPY package*.json ./
+COPY package*.json pnpm-lock.yaml ./
 
-# Install dependencies
+# Install dependencies (will run postinstall automatically if allowed)
 RUN pnpm install
-
-# Approve builds so @prisma/client postinstall runs
-RUN pnpm exec pnpm-approve-builds --yes
 
 # Copy the rest of the app
 COPY . .
 
-# Compile TypeScript and generate Prisma Client
-RUN pnpm run build && pnpm prisma generate
+# Generate Prisma Client before build to ensure TS types exist
+RUN pnpm prisma generate
+
+# Compile TypeScript
+RUN pnpm run build
 
 # Run migrations & start the app
 CMD ["sh", "-c", "pnpm prisma migrate deploy && pnpm run start"]
