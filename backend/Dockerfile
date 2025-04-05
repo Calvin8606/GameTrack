@@ -13,6 +13,9 @@ COPY package*.json ./
 # Install dependencies
 RUN pnpm install
 
+# Approve builds so @prisma/client postinstall runs
+RUN pnpm exec pnpm-approve-builds --yes
+
 # Copy the rest of the app
 COPY . .
 
