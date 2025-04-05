@@ -1,6 +1,9 @@
 # Use lightweight Node image
 FROM node:22.14.0-alpine
 
+# Install pnpm globally
+RUN corepack enable && corepack prepare pnpm@latest --activate
+
 # Set working directory
 WORKDIR /app
 
@@ -16,5 +19,5 @@ COPY . .
 # Compile TypeScript and generate Prisma Client
 RUN pnpm run build && pnpm prisma generate
 
-# Run migrations and start server at runtime
-CMD ["node dist/server.js"]
+# Run migrations & start the app
+CMD ["sh", "-c", "pnpm prisma migrate deploy && pnpm run start"]
