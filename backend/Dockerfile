@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # Compile TypeScript and generate Prisma Client
-RUN npm run build && npx prisma generate
+RUN pnpm run build && pnpm prisma generate
 
 # Run migrations and start server at runtime
 CMD ["node dist/server.js"]
